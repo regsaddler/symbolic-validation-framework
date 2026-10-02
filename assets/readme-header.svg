@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 344" role="img" aria-labelledby="title desc">
+<title id="title">EXPLICIT CHECKS. VISIBLE LIMITS.</title>
+<desc id="desc">A small gatekeeper. An inspectable heuristic. Decorative geometric illustration; no measured results are depicted.</desc>
+<defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#b9d3e3" stroke-opacity=".045"/></pattern></defs>
+<rect x="1" y="1" width="1278" height="342" rx="16" fill="#0b141e" stroke="#304252"/>
+<rect x="2" y="2" width="1276" height="340" rx="15" fill="url(#grid)"/>
+<path d="M52 48h30" stroke="#f5c47b" stroke-width="3"/>
+<text x="96" y="53" fill="#f5c47b" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2">EXPERIMENTAL / SYMBOLIC VALIDATION</text>
+<text x="50" y="139" fill="#f0f6fc" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700" letter-spacing="-1.8">EXPLICIT CHECKS.</text>
+<text x="50" y="203" fill="#f0f6fc" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700" letter-spacing="-1.8">VISIBLE LIMITS.</text>
+<text x="53" y="254" fill="#acbdcd" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" letter-spacing="0">A small gatekeeper. An inspectable heuristic.</text>
+<path d="M53 292h650" stroke="#304252"/>
+<text x="53" y="316" fill="#8196aa" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" letter-spacing="2">SOURCE / METHOD / LIMITS</text>
+<path d="M745 64v217" stroke="#304252"/>
+<rect x="811" y="94" width="66" height="167" rx="5" fill="#f5c47b" fill-opacity=".04" stroke="#f5c47b" stroke-opacity=".35"/><path d="M832 178h24" fill="none" stroke="#f5c47b" stroke-opacity=".8" stroke-width="2"/><rect x="917" y="94" width="66" height="167" rx="5" fill="#f5c47b" fill-opacity=".04" stroke="#f5c47b" stroke-opacity=".35"/><path d="M938 178h24" fill="none" stroke="#f5c47b" stroke-opacity=".8" stroke-width="2"/><rect x="1023" y="94" width="66" height="167" rx="5" fill="#f5c47b" fill-opacity=".04" stroke="#f5c47b" stroke-opacity=".35"/><path d="M1044 178h24" fill="none" stroke="#f5c47b" stroke-opacity=".8" stroke-width="2"/><path d="M780 178h350" fill="none" stroke="#f5c47b" stroke-opacity=".4" stroke-width="2"/><circle cx="780" cy="178" r="5" fill="#f5c47b"/><circle cx="1130" cy="178" r="5" fill="#f5c47b"/><path d="M950 178v105h113" fill="none" stroke="#f5c47b" stroke-opacity=".7" stroke-width="2"/><circle cx="1063" cy="283" r="4" fill="#f5c47b"/>
+</svg>

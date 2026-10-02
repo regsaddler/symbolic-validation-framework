@@ -1,3 +1,7 @@
+<p>
+  <img src="assets/readme-header.svg" alt="EXPLICIT CHECKS. VISIBLE LIMITS. A small gatekeeper. An inspectable heuristic." width="100%">
+</p>
+
 # Symbolic Validation Framework (SVN 1.2)
 
 A small Python gatekeeper for text outputs, with symbol time-to-live,
@@ -8,6 +12,8 @@ This implementation does not establish truth, emotional safety, or prevention
 of recursive drift.
 
 [Try the example](#try-the-example) · [What it checks](#what-it-checks) · [Known limitations](#known-limitations)
+
+---
 
 ## Try the example
 
@@ -64,6 +70,8 @@ words divided by total words. It does not compare meanings or calculate
 Shannon entropy. For answer clustering, see the separate
 [semantic-entropy project](https://github.com/regsaddler/semantic-entropy).
 
+---
+
 ## Known limitations
 
 - High word diversity can reject ordinary valid sentences. Repetition can
@@ -85,12 +93,23 @@ rejection, so it does not isolate the entropy check its name describes. This
 README repair documents those limitations without changing the algorithm or
 rewriting the tests to make them pass.
 
+<details>
+<summary>Possible extensions — not implemented</summary>
+
 ## Possible extensions
 
 The original proposal included emotion-symbol decoupling, a recursion-loop
 monitor, and YAML-configurable validation chains. These remain ideas, not
 implemented capabilities.
 
+</details>
+
 ## License
 
 [MIT License](LICENSE.txt) © 2025
+
+---
+
+<sub>PUBLIC RESEARCH TOOLS</sub>
+
+[Reg Saddler](https://github.com/regsaddler) · [receipt-run-lite](https://github.com/regsaddler/receipt-run-lite) · [semantic-entropy](https://github.com/regsaddler/semantic-entropy) · [Difference Theory](https://differencetheory.com)
