@@ -1,25 +1,30 @@
 # Symbolic Validation Framework (SVN 1.2)
 
-This toolkit helps prevent symbolic AI systems from drifting into recursive loops, emotional mimicry, or narrative overreach. It wraps symbolic outputs in logic validation gates and tracks semantic entropy, utility, and real-world alignment.
+A small Python gatekeeper for text outputs, with symbol time-to-live,
+a word-diversity heuristic, and caller-supplied reality and utility checks.
 
-## Features
-- Symbol TTL (time-to-live)
-- Entropy detection
-- Logic and utility validators
-- Minimal dependency, high extensibility
+**Experimental prototype. The current test suite has a known failure.**
+This implementation does not establish truth, emotional safety, or prevention
+of recursive drift.
 
-## Installation
+[Try the example](#try-the-example) · [What it checks](#what-it-checks) · [Known limitations](#known-limitations)
 
-This framework requires Python 3.7+.
+## Try the example
 
-Clone the repo and run the test suite:
+Python 3.7 or newer; standard library only.
 
 ```bash
-python -m unittest discover tests/
+git clone https://github.com/regsaddler/symbolic-validation-framework.git
+cd symbolic-validation-framework
+python3
+```
 
+Paste this into the Python interpreter:
+
+```python
 from symbolic_gatekeeper import SymbolicGatekeeper
 
-# Example reality and utility checkers
+# Illustrative callbacks, not factual verification.
 def reality_check(output):
     return "falsehood" not in output.lower()
 
@@ -27,33 +32,65 @@ def utility_check(output):
     return len(output.split()) > 5
 
 gatekeeper = SymbolicGatekeeper(reality_check, utility_check)
-
-# Validate a symbolic output
 symbolic_text = "A myth in balance is a map, not a command."
 result = gatekeeper.validate_symbolic_output("wisdom_quote", symbolic_text)
+print(result)
+```
 
-When to Use This
-Use this toolkit if your symbolic system:
+Expected output:
 
-Performs open-ended or poetic generation
+```text
+[REJECTED] High entropy in 'wisdom_quote' → Possible recursive drift.
+False
+```
 
-References identity, narrative, emotion, or cultural patterns
+The original poetic example is rejected: its word-diversity ratio is `0.9`.
+That illustrates the heuristic's limitation; the printed drift warning is not
+evidence of recursive drift. Even acceptance would only mean the text passed
+these checks. The callbacks above cannot determine whether an idea is true or useful.
 
-Interfaces with humans in trusted or meaningful ways
+## What it checks
 
-Avoid using this for:
+| Step | Current behavior |
+| --- | --- |
+| Existing symbol | Removes an expired entry when the same label is validated again |
+| Word diversity | Rejects text whose unique-word ratio exceeds `0.85` |
+| Reality callback | Applies the function supplied by the caller |
+| Utility callback | Applies the function supplied by the caller |
+| Accepted result | Stores the text under its label with a default lifetime of 600 seconds |
 
-Low-latency deterministic pipelines
+The function named `semantic_entropy` computes unique whitespace-separated
+words divided by total words. It does not compare meanings or calculate
+Shannon entropy. For answer clustering, see the separate
+[semantic-entropy project](https://github.com/regsaddler/semantic-entropy).
 
-Systems where symbolic outputs aren’t used or introspected
+## Known limitations
 
-Future Extensions
-Emotion-symbol decoupling
+- High word diversity can reject ordinary valid sentences. Repetition can
+  lower the score without making text more reliable.
+- Expiration is checked lazily for a matching label, not by a background cleanup
+  process. The symbol store is in memory.
+- The example callbacks are placeholders for checks you must design and validate.
+  No factual verifier, emotional-safety evaluator, or recursion monitor is included.
 
-Recursion loop monitor with entropy trend analysis
+Run the existing tests from the repository root:
 
-YAML-configurable validation chains
+```bash
+python3 -B -m unittest discover -s tests -v
+```
 
-License
-MIT License © 2025
+As checked on October 2, 2026, `test_validation` fails: its expected-valid sentence
+exceeds the word-diversity threshold. The other test passes through a utility
+rejection, so it does not isolate the entropy check its name describes. This
+README repair documents those limitations without changing the algorithm or
+rewriting the tests to make them pass.
 
+## Possible extensions
+
+The original proposal included emotion-symbol decoupling, a recursion-loop
+monitor, and YAML-configurable validation chains. These remain ideas, not
+implemented capabilities.
+
+## License
+
+[MIT License](LICENSE.txt) © 2025
