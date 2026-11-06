@@ -7,9 +7,8 @@
 A small Python gatekeeper for text outputs, with symbol time-to-live,
 a word-diversity heuristic, and caller-supplied reality and utility checks.
 
-**Experimental prototype. The current test suite has a known failure.**
-This implementation does not establish truth, emotional safety, or prevention
-of recursive drift.
+**Experimental prototype.** This implementation does not establish truth,
+emotional safety, or prevention of recursive drift.
 
 [Try the example](#try-the-example) · [What it checks](#what-it-checks) · [Known limitations](#known-limitations)
 
@@ -46,36 +45,36 @@ print(result)
 Expected output:
 
 ```text
-[REJECTED] High entropy in 'wisdom_quote' → Possible recursive drift.
-False
+[ACCEPTED] Symbol 'wisdom_quote' stored.
+True
 ```
 
-The original poetic example is rejected: its word-diversity ratio is `0.9`.
-That illustrates the heuristic's limitation; the printed drift warning is not
-evidence of recursive drift. Even acceptance would only mean the text passed
-these checks. The callbacks above cannot determine whether an idea is true or useful.
+The poetic example has high lexical diversity and is not treated as repetitive.
+Acceptance only means the text passed these checks. The callbacks above cannot
+determine whether an idea is true or useful.
 
 ## What it checks
 
 | Step | Current behavior |
 | --- | --- |
 | Existing symbol | Removes an expired entry when the same label is validated again |
-| Word diversity | Rejects text whose unique-word ratio exceeds `0.85` |
+| Word diversity | Rejects text whose unique-word ratio is below `0.25` by default |
 | Reality callback | Applies the function supplied by the caller |
 | Utility callback | Applies the function supplied by the caller |
 | Accepted result | Stores the text under its label with a default lifetime of 600 seconds |
 
-The function named `semantic_entropy` computes unique whitespace-separated
-words divided by total words. It does not compare meanings or calculate
-Shannon entropy. For answer clustering, see the separate
+The `lexical_diversity` function computes unique whitespace-separated words
+divided by total words. The old `semantic_entropy` name remains as a
+compatibility alias. Neither compares meanings nor calculates Shannon entropy.
+For answer clustering, see the separate
 [semantic-entropy project](https://github.com/regsaddler/semantic-entropy).
 
 ---
 
 ## Known limitations
 
-- High word diversity can reject ordinary valid sentences. Repetition can
-  lower the score without making text more reliable.
+- Low word diversity can flag intentional repetition; the threshold is a
+  caller-configurable heuristic, not evidence that a loop or failure occurred.
 - Expiration is checked lazily for a matching label, not by a background cleanup
   process. The symbol store is in memory.
 - The example callbacks are placeholders for checks you must design and validate.
@@ -87,11 +86,8 @@ Run the existing tests from the repository root:
 python3 -B -m unittest discover -s tests -v
 ```
 
-As checked on October 2, 2026, `test_validation` fails: its expected-valid sentence
-exceeds the word-diversity threshold. The other test passes through a utility
-rejection, so it does not isolate the entropy check its name describes. This
-README repair documents those limitations without changing the algorithm or
-rewriting the tests to make them pass.
+The tests isolate ordinary acceptance, repetitive-text rejection, and threshold
+validation. They do not validate the heuristic against a real drift corpus.
 
 <details>
 <summary>Possible extensions — not implemented</summary>
