@@ -15,9 +15,21 @@ class TestSymbolicGatekeeper(unittest.TestCase):
 
     def test_rejection_entropy(self):
         gk = SymbolicGatekeeper(dummy_reality_check, dummy_utility_check)
-        repetitive = "loop loop loop loop loop"
+        repetitive = "loop loop loop loop loop loop"
         result = gk.validate_symbolic_output("bad_entropy", repetitive)
         self.assertFalse(result)
+
+    def test_high_diversity_is_not_mislabeled_as_drift(self):
+        gk = SymbolicGatekeeper(dummy_reality_check, dummy_utility_check)
+        result = gk.validate_symbolic_output(
+            "ordinary_sentence",
+            "Every distinct word here still forms an ordinary useful sentence.",
+        )
+        self.assertTrue(result)
+
+    def test_invalid_diversity_threshold_is_rejected(self):
+        with self.assertRaises(ValueError):
+            SymbolicGatekeeper(dummy_reality_check, dummy_utility_check, 1.1)
 
 if __name__ == "__main__":
     unittest.main()
